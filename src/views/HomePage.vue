@@ -28,26 +28,30 @@
         <!-- <button id="search-button" class="btn btn-secondary" type="submit">Search</button> -->
       </form>
 
+      <div id="container1" style="margin-top:10%; visibility: hidden;">
 
+</div>
+<div id="container2" style="margin-top:10%;"></div>
+<div id="container3" style="margin-top:10%;"></div>
+<div id="container4" style="margin-top:10%;"></div>
+<div id="container5" style="margin-top:10%; padding-bottom: 50%;"></div>
       <ion-input>
         <ion-label position="floating">Name</ion-label>
         <ion-input type="text"></ion-input>
       </ion-input>
+      
+    <ion-content>
       <div id="container" style="margin-top:80%;">
         <!-- <strong>Ready to create an app?</strong> -->
 
         <!-- <div id="container" style="margin-top:30%;"></div> -->
-        <div id="container1" style="margin-top:10%; visibility: hidden;">
-
-        </div>
-        <div id="container2" style="margin-top:10%;"></div>
-        <div id="container3" style="margin-top:10%;"></div>
-        <div id="container4" style="margin-top:10%;"></div>
-        <div id="container5" style="margin-top:10%;"></div>
+        
 
         <!-- <p>Start with Ionic <a href="https://ionicframework.com/docs/components" rel="noopener noreferrer"
                                target="_blank">UI Components</a></p> -->
+
       </div>
+      </ion-content>
     </ion-content>
   </ion-page>
 </template>
