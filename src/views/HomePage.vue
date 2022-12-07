@@ -28,20 +28,15 @@
         <!-- <button id="search-button" class="btn btn-secondary" type="submit">Search</button> -->
       </form>
 
-      <div id="container1" style="margin-top:10%; visibility: hidden;">
+      <div id="container1" style="margin-top:10%;">
 
 </div>
 <div id="container2" style="margin-top:10%;"></div>
 <div id="container3" style="margin-top:10%;"></div>
 <div id="container4" style="margin-top:10%;"></div>
-<div id="container5" style="margin-top:10%; padding-bottom: 50%;"></div>
-      <ion-input>
-        <ion-label position="floating">Name</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-input>
+<div id="container5" style="margin-top:10%; padding-bottom: 10%; margin-bottom:50%;"></div>
       
-    <ion-content>
-      <div id="container" style="margin-top:80%;">
+      <div id="container" style="margin-top:10%;">
         <!-- <strong>Ready to create an app?</strong> -->
 
         <!-- <div id="container" style="margin-top:30%;"></div> -->
@@ -51,7 +46,7 @@
                                target="_blank">UI Components</a></p> -->
 
       </div>
-      </ion-content>
+  
     </ion-content>
   </ion-page>
 </template>
@@ -108,10 +103,8 @@ export default defineComponent({
         const img2 = element.url;
         console.log(img2);
         let str = "<ion-card>" +
-            "<ion-card-header>" +
-            "<ion-card-title>Card Title</ion-card-title>" +
-            "<ion-card-subtitle>Card Subtitle</ion-card-subtitle>" +
-            "</ion-card-header>" +
+   
+            
 
             "<ion-card-content>" +
             "<img src='" + img2 + "' />" +
