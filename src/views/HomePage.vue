@@ -20,7 +20,8 @@
             <option v-for="o in opts" :key="o.value" :value="o.value">{{ o.name }}</option>
           </select>
         </div>
-        <button id="search-button" class="btn btn-secondary" type="submit">Search</button>
+        <ion-button id="search-button" class="btn btn-secondary" type="submit">Default</ion-button>
+        <!-- <button id="search-button" class="btn btn-secondary" type="submit">Search</button> -->
       </form>
 
 
@@ -28,10 +29,20 @@
         <ion-label position="floating">Name</ion-label>
         <ion-input type="text"></ion-input>
       </ion-input>
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a href="https://ionicframework.com/docs/components" rel="noopener noreferrer"
-                               target="_blank">UI Components</a></p>
+      <div id="container" style="margin-top:80%;">
+        <!-- <strong>Ready to create an app?</strong> -->
+       
+        <!-- <div id="container" style="margin-top:30%;"></div> -->
+        <div id="container1" style="margin-top:10%;">
+          
+        </div>
+        <div id="container2" style="margin-top:10%;"></div>
+        <div id="container3" style="margin-top:10%;"></div>
+        <div id="container4" style="margin-top:10%;"></div>
+        <div id="container5" style="margin-top:10%;"></div>
+
+        <!-- <p>Start with Ionic <a href="https://ionicframework.com/docs/components" rel="noopener noreferrer"
+                               target="_blank">UI Components</a></p> -->
       </div>
     </ion-content>
   </ion-page>
@@ -54,11 +65,14 @@ export default defineComponent({
     name: String
   },
   methods: {
-    query() {
+    doThis() {
+
+    },
+    async query() {
 
       const {Configuration, OpenAIApi} = require("openai");
       const configuration = new Configuration({
-        apiKey: "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",
+        apiKey: "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",
       });
       // const openai = new OpenAIApi(configuration);
       // const response = openai.createCompletion({
@@ -68,17 +82,39 @@ export default defineComponent({
       //   max_tokens: 7,
       // });
       // console.log(response);
-
+      let val = document.getElementById("query-string").value;
 
       const openai = new OpenAIApi(configuration);
-      const response = openai.createImage({
-        prompt: "A cute baby sea otter",
-        n: 2,
-        size: "1024x1024",
+      const response = await openai.createImage({
+        prompt: val,
+        n: 5,
+        size: "512x512",
       });
 
-      console.log(response);
-      this.$emit = ('search-finished', this.searchResults);
+      const array = response.data.data;
+      //const img = response.data.data[0].url;
+      console.log(response.data.data[0].url);
+      let i = 0;
+      array.forEach(element => {
+        i = i + 1;
+        const img2 = element.url;
+        console.log(img2);
+        let str = "<ion-card>" +
+          "<ion-card-header>" +
+            "<ion-card-title>Card Title</ion-card-title>" +
+            "<ion-card-subtitle>Card Subtitle</ion-card-subtitle>" +
+            "</ion-card-header>" +
+
+            "<ion-card-content>" +
+            "<img src='" + img2 + "' />" +
+            "</ion-card-content>" +
+            "</ion-card>";
+            // document.getElementById("container" + i).innerHTML = "<img src='" + img2 + "' />";
+            document.getElementById("container" + i).innerHTML = str;
+
+      });
+      //document.write("<img src='" + img + "' />");
+      //this.$emit = ('search-finished', this.searchResults);
     }
   },
   data() {
@@ -88,6 +124,7 @@ export default defineComponent({
       searchTerm: '',
       searchResults: [],
       limit: 2,
+
 
     }
   }
