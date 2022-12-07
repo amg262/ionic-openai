@@ -13,29 +13,31 @@
         </ion-toolbar>
       </ion-header>
       <ion-list>
-        <form @submit.prevent="query">
+        <ion-item>
+          <ion-label position="floating">Default input</ion-label>
+          <ion-input placeholder="Enter text" id="query-string" v-model="queryString" class="form-control m-1"
+                     type="text"></ion-input>
+        </ion-item>
+      </ion-list>
+      <form @submit.prevent="query">
         <!-- <input id="query-string" v-model="queryString" class="form-control m-1" placeholder="Search API" type="text"> -->
         <div class="row">
-          <ion-list>
-<ion-item>
-  <ion-label position="floating">Default input</ion-label>
-  <ion-input placeholder="Enter text" id="query-string" v-model="queryString" class="form-control m-1" type="text"></ion-input>
-</ion-item>
-  </ion-list>
+
         </div>
         <ion-button id="search-button" class="btn btn-secondary" type="submit">Default</ion-button>
         <!-- <button id="search-button" class="btn btn-secondary" type="submit">Search</button> -->
       </form>
-  </ion-list>
-      
 
 
-      
+      <ion-input>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-input>
       <div id="container" style="margin-top:80%;">
         <!-- <strong>Ready to create an app?</strong> -->
 
         <!-- <div id="container" style="margin-top:30%;"></div> -->
-        <div id="container1" style="margin-top:10%;">
+        <div id="container1" style="margin-top:10%; visibility: hidden;">
 
         </div>
         <div id="container2" style="margin-top:10%;"></div>
