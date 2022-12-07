@@ -14,7 +14,7 @@
       </ion-header>
       <ion-list>
         <ion-item>
-          <ion-label position="floating">Default input</ion-label>
+          <ion-label position="floating">Enter phrase to generate unique art</ion-label>
           <ion-input placeholder="Enter text" id="query-string" v-model="queryString" class="form-control m-1"
                      type="text"></ion-input>
         </ion-item>
@@ -24,29 +24,45 @@
         <div class="row">
 
         </div>
-        <ion-button id="search-button" class="btn btn-secondary" type="submit">Default</ion-button>
+        <ion-button id="search-button" class="btn btn-secondary" type="submit">Generate art</ion-button>
+        <!-- <button id="search-button" class="btn btn-secondary" type="submit">Search</button> -->
+      </form>
+
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Talk to the AI</ion-label>
+          <ion-input placeholder="Enter text" id="query-string2" v-model="queryString" class="form-control m-1"
+                     type="text"></ion-input>
+        </ion-item>
+      </ion-list>
+      <form @submit.prevent="query2">
+        <!-- <input id="query-string" v-model="queryString" class="form-control m-1" placeholder="Search API" type="text"> -->
+        <div class="row">
+
+        </div>
+        <ion-button id="search-button2" class="btn btn-secondary" type="submit">Ask me anything</ion-button>
         <!-- <button id="search-button" class="btn btn-secondary" type="submit">Search</button> -->
       </form>
 
       <div id="container1" style="margin-top:10%;">
 
-</div>
-<div id="container2" style="margin-top:10%;"></div>
-<div id="container3" style="margin-top:10%;"></div>
-<div id="container4" style="margin-top:10%;"></div>
-<div id="container5" style="margin-top:10%; padding-bottom: 10%; margin-bottom:50%;"></div>
-      
+      </div>
+      <div id="container2" style="margin-top:10%;"></div>
+      <div id="container3" style="margin-top:10%;"></div>
+      <div id="container4" style="margin-top:10%;"></div>
+      <div id="container5" style="margin-top:10%; padding-bottom: 10%; margin-bottom:50%;"></div>
+
       <div id="container" style="margin-top:10%;">
         <!-- <strong>Ready to create an app?</strong> -->
 
         <!-- <div id="container" style="margin-top:30%;"></div> -->
-        
+
 
         <!-- <p>Start with Ionic <a href="https://ionicframework.com/docs/components" rel="noopener noreferrer"
                                target="_blank">UI Components</a></p> -->
 
       </div>
-  
+
     </ion-content>
   </ion-page>
 </template>
@@ -73,8 +89,8 @@ export default defineComponent({
     },
     async query() {
 
-      const {Configuration, OpenAIApi} = require("openai");
-      const configuration = new Configuration({
+      let {Configuration, OpenAIApi} = require("openai");
+      let configuration = new Configuration({
         apiKey: "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",
       });
       // const openai = new OpenAIApi(configuration);
@@ -87,14 +103,14 @@ export default defineComponent({
       // console.log(response);
       let val = document.getElementById("query-string").value;
 
-      const openai = new OpenAIApi(configuration);
-      const response = await openai.createImage({
+      let openai = new OpenAIApi(configuration);
+      let response = await openai.createImage({
         prompt: val,
         n: 5,
         size: "512x512",
       });
 
-      const array = response.data.data;
+      let array = response.data.data;
       //const img = response.data.data[0].url;
       console.log(response.data.data[0].url);
       let i = 0;
@@ -103,8 +119,7 @@ export default defineComponent({
         const img2 = element.url;
         console.log(img2);
         let str = "<ion-card>" +
-   
-            
+
 
             "<ion-card-content>" +
             "<img src='" + img2 + "' />" +
@@ -116,6 +131,55 @@ export default defineComponent({
       });
       //document.write("<img src='" + img + "' />");
       //this.$emit = ('search-finished', this.searchResults);
+    },
+
+    async query2() {
+
+
+      let {Configuration, OpenAIApi} = require("openai");
+      let configuration = new Configuration({
+        apiKey: "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",
+      });
+
+      let val2 = document.getElementById("query-string2").value;
+      let openai = new OpenAIApi(configuration);
+      let response = await openai.createAnswer({
+        search_model: "ada",
+        model: "curie",
+        question: val2,
+        documents: [],
+        examples_context: "In 2017, U.S. life expectancy was 78.6 years.",
+        examples: [["What is human life expectancy in the United States?", "78 years."]],
+        max_tokens: 5,
+        stop: ["\n", "<|endoftext|>"],
+      });
+   
+      console.log(response.data.answers)
+      let i = 0;
+      i = i + 1;
+
+      document.getElementById("container" + i).innerHTML = response.data.answers
+//       const array = response;
+// //const img = response.data.data[0].url;
+ 
+//       let i = 0;
+      // array.forEach(element => {
+      //   i = i + 1;
+      //   const img2 = element;
+      //   console.log(img2);
+      //   let str = "<ion-card>" +
+
+
+      //       "<ion-card-content>" +
+      //       "<p>" + img2 + "</p>" +
+      //       "</ion-card-content>" +
+      //       "</ion-card>";
+      //   // document.getElementById("container" + i).innerHTML = "<img src='" + img2 + "' />";
+      //   document.getElementById("container" + i).innerHTML = str;
+
+      // });
+//document.write("<img src='" + img + "' />");
+//this.$emit = ('search-finished', this.searchResults);
     }
   },
   data() {
